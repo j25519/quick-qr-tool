@@ -1,12 +1,13 @@
-# React + Vite
+# Quick QR Creator Tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight simple tool for generating QR codes with no bullshit (like all those QR generators full of ads and some that even try and make you pay for subscriptions).
 
-Currently, two official plugins are available:
+Uses standard formats and includes options for many types of social links as well as any URL, phone numbers, emails, calendar events, WiFi networks, coordinates, and more.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Created to help the marketing department but published here as a log of my work and made public in case anyone else finds it handy.
 
-## Expanding the ESLint configuration
+May or may not end up getting maintained.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Feel free to fork as long as you link to this repo as credit for the OG.
+
+Enjoy!
