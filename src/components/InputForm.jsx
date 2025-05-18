@@ -24,7 +24,7 @@ function InputForm({ category, input, onInputChange, onGenerate, validateInput, 
       end: 'Select end date and time',
       location: 'Enter location (optional)',
     },
-    wifi: { ssid: 'Enter WiFi SSID', type: 'Select security type', password: 'Enter password' },
+    wifi: { ssid: 'Enter WiFi Network Name (SSID)', type: 'Select security type', password: 'Enter Password (WPA)' },
     geo: { lat: 'Enter latitude (e.g., 40.7128)', lon: 'Enter longitude (e.g., -74.0060)' },
   }
 
@@ -172,6 +172,16 @@ function InputForm({ category, input, onInputChange, onGenerate, validateInput, 
             {category.id === 'phone' && (
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Our phone number validation expects the international phone number format, e.g. +44 for the UK.
+              </p>
+            )}
+            {category.id === 'bitcoin' && (
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Supports legacy, SegWit, and Taproot addresses.
+              </p>
+            )}
+            {category.id === 'url' && (
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Link to any URL including specific YouTube videos, Spotify albums, or just your website.
               </p>
             )}
           </>
