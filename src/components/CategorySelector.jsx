@@ -7,7 +7,7 @@ function CategorySelector({ categories, selected, onSelect }) {
         <Listbox.Button className="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
           {selected.name}
         </Listbox.Button>
-        <Listbox.Options className="absolute w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg z-[100]">
+        <Listbox.Options className="absolute w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg z-[100] max-h-80 overflow-y-auto">
           {categories.map((cat) => (
             <Listbox.Option
               key={cat.id}

@@ -23,6 +23,8 @@ const categories = [
   { id: 'instagram', name: 'Instagram Profile', format: (username) => `https://instagram.com/${username.replace('@', '')}` },
   { id: 'tiktok', name: 'TikTok Profile', format: (username) => `https://tiktok.com/@${username.replace('@', '')}` },
   { id: 'telegram', name: 'Telegram Profile', format: (username) => `https://t.me/${username.replace('@', '')}` },
+  { id: 'linkedin', name: 'LinkedIn Profile', format: ({ username, type }) => 
+    type === 'company' ? `https://linkedin.com/company/${username.replace('@', '')}` : `https://linkedin.com/in/${username.replace('@', '')}` },
   { id: 'paypal', name: 'PayPal Wallet', format: ({ username, amount, currency }) => `https://www.paypal.com/paypalme/${username.replace('@', '')}/${amount}?currency=${currency}` },
   { id: 'bitcoin', name: 'Bitcoin Wallet', format: (address) => `bitcoin:${address}` },
   { id: 'event', name: 'Calendar Event', format: ({ title, start, end, location }) => {
@@ -43,6 +45,7 @@ function App() {
     instagram: '',
     tiktok: '',
     telegram: '',
+    linkedin: { username: '', type: 'profile' },
     paypal: { username: '', amount: '', currency: 'GBP' },
     bitcoin: '',
     event: { title: '', start: '', end: '', location: '' },
@@ -109,6 +112,7 @@ function App() {
       event: ['title', 'start', 'end'],
       wifi: ['ssid'],
       geo: ['lat', 'lon'],
+      linkedin: ['username', 'type'],
     }
     if (requiredFields[category.id]) {
       const missing = requiredFields[category.id].filter(
@@ -159,9 +163,10 @@ function App() {
       case 'instagram':
       case 'tiktok':
       case 'telegram':
-        return /^[a-zA-Z0-9_-]{5,}$/.test(input.replace('@', ''))
+      case 'linkedin':
+        return /^[a-zA-Z0-9_-]{3,}$/.test(input.username.replace('@', ''))
           ? { isValid: true, error: '', message: '' }
-          : { isValid: false, error: 'Invalid username (5+ characters, letters, numbers, underscores, hyphens only)', message: '' }
+          : { isValid: false, error: 'Invalid username (3+ characters, letters, numbers, underscores, hyphens only)', message: '' }
       case 'paypal': {
         const { username, amount, currency } = input
         if (!username || !/^[a-zA-Z0-9_]{1,50}$/.test(username.replace('@', ''))) {

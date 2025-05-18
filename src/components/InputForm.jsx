@@ -14,6 +14,7 @@ function InputForm({ category, input, onInputChange, onGenerate, validateInput, 
     instagram: 'Enter Instagram username (e.g., @example)',
     tiktok: 'Enter TikTok username (e.g., @example)',
     telegram: 'Enter Telegram username (e.g., @example)',
+    linkedin: { username: 'Enter LinkedIn username (e.g., @john-doe)', type: 'Select profile type' },
     paypal: { username: 'Enter PayPal username', amount: 'Enter amount (e.g., 10.99)', currency: 'Select currency' },
     bitcoin: 'Enter Bitcoin address',
     event: {
@@ -131,6 +132,14 @@ function InputForm({ category, input, onInputChange, onGenerate, validateInput, 
           <>
             {renderInput('lat', placeholders.geo.lat, 'number', { step: 'any' })}
             {renderInput('lon', placeholders.geo.lon, 'number', { step: 'any' })}
+          </>
+        ) : category.id === 'linkedin' ? (
+          <>
+            {renderInput('username', placeholders.linkedin.username, 'text')}
+            {renderSelect('type', [
+              { value: 'profile', label: 'Personal Profile' },
+              { value: 'company', label: 'Company Page' },
+            ], placeholders.linkedin.type)}
           </>
         ) : (
           <>

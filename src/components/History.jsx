@@ -29,7 +29,9 @@ function History({ history, onClose, onDelete, addToast }) {
   }
 
   const getFilename = (input, categoryId) => {
-    const sanitizedInput = sanitizeFilename(input, categoryId === 'url')
+    // For categories with object inputs, use the primary field (e.g., username)
+    const inputValue = ['linkedin', 'paypal', 'event', 'wifi', 'geo'].includes(categoryId) ? input.username || input.title || input.ssid || `${input.lat}-${input.lon}` : input
+    const sanitizedInput = sanitizeFilename(inputValue, categoryId === 'url')
     const suffix = {
       url: 'qr-code',
       email: 'email-qr-code',
@@ -38,6 +40,7 @@ function History({ history, onClose, onDelete, addToast }) {
       instagram: 'instagram-account-qr-code',
       tiktok: 'tiktok-account-qr-code',
       telegram: 'telegram-account-qr-code',
+      linkedin: 'linkedin-account-qr-code',
       paypal: 'paypal-qr-code',
       bitcoin: 'bitcoin-address-qr-code',
       event: 'event-qr-code',
@@ -110,6 +113,8 @@ function History({ history, onClose, onDelete, addToast }) {
                           return `${item.input.ssid}${item.input.type ? `, ${item.input.type}` : ''}${item.input.password ? `, [password]` : ''}`;
                         case 'geo':
                           return `${item.input.lat}, ${item.input.lon}`;
+                        case 'linkedin':
+                          return `${item.input.username} (${item.input.type === 'company' ? 'Company Page' : 'Personal Profile'})`;
                         default:
                           return item.input;
                       }
