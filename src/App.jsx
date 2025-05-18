@@ -19,6 +19,7 @@ const categories = [
   }},
   { id: 'email', name: 'Email Address', format: (email) => `mailto:${email}` },
   { id: 'phone', name: 'Phone Number', format: (phone) => `tel:${phone}` },
+  { id: 'whatsapp', name: 'WhatsApp Message', format: (phone) => `https://wa.me/${phone.replace(/^\+/, '')}` },
   { id: 'x_profile', name: 'X Profile', format: (username) => `https://x.com/${username.replace('@', '')}` },
   { id: 'instagram', name: 'Instagram Profile', format: (username) => `https://instagram.com/${username.replace('@', '')}` },
   { id: 'tiktok', name: 'TikTok Profile', format: (username) => `https://tiktok.com/@${username.replace('@', '')}` },
@@ -41,6 +42,7 @@ function App() {
     url: '',
     email: '',
     phone: '',
+    whatsapp: '',
     x_profile: '',
     instagram: '',
     tiktok: '',
@@ -142,7 +144,6 @@ function App() {
     switch (categoryId) {
       case 'url':
         try {
-          // Prepend https:// for protocol-less inputs, like the format function
           const testInput = input.trim() && !/^[a-zA-Z]+:\/\//.test(input) ? `https://${input}` : input;
           new URL(testInput);
           return { isValid: true, error: '', message: '' }
@@ -154,11 +155,12 @@ function App() {
           ? { isValid: true, error: '', message: '' }
           : { isValid: false, error: 'Invalid email address', message: '' }
       case 'phone':
+      case 'whatsapp':
         if (!input) return { isValid: false, error: 'Phone number is required', message: '' }
         if (!/^\+?[1-9]\d{1,14}$/.test(input)) {
           return { isValid: false, error: 'Invalid phone number (e.g., +1234567890)', message: '' }
         }
-        return { isValid: true, error: '', message: 'Phone dial link will be generated' }
+        return { isValid: true, error: '', message: categoryId === 'phone' ? 'Phone dial link will be generated' : 'WhatsApp message link will be generated' }
       case 'x_profile':
       case 'instagram':
       case 'tiktok':

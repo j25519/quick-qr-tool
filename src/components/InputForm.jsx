@@ -10,6 +10,7 @@ function InputForm({ category, input, onInputChange, onGenerate, validateInput, 
     url: 'Enter URL (e.g., example.com)',
     email: 'Enter email address',
     phone: 'Enter phone number (e.g., +1234567890)',
+    whatsapp: 'Enter phone number (e.g., +1234567890)',
     x_profile: 'Enter X username (e.g., @example)',
     instagram: 'Enter Instagram username (e.g., @example)',
     tiktok: 'Enter TikTok username (e.g., @example)',
@@ -147,7 +148,7 @@ function InputForm({ category, input, onInputChange, onGenerate, validateInput, 
               type={
                 category.id === 'url' ? 'url' :
                 category.id === 'email' ? 'email' :
-                category.id === 'phone' ? 'tel' :
+                category.id === 'phone' || category.id === 'whatsapp' ? 'tel' :
                 'text'
               }
               value={input}
@@ -161,6 +162,16 @@ function InputForm({ category, input, onInputChange, onGenerate, validateInput, 
             {category.id === 'telegram' && (
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 You can enter the username for a Telegram user, channel, bot, or public group.
+              </p>
+            )}
+            {category.id === 'whatsapp' && (
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                WhatsApp requires the international phone number format, e.g. +44 for the UK.
+              </p>
+            )}
+            {category.id === 'phone' && (
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Our phone number validation expects the international phone number format, e.g. +44 for the UK.
               </p>
             )}
           </>

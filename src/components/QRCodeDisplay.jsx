@@ -29,13 +29,13 @@ function QRCodeDisplay({ value, input, category, blackQrCode }) {
   }
 
   const getFilename = () => {
-    // For categories with object inputs, use the primary field (e.g., username)
     const inputValue = category.id === 'linkedin' || category.id === 'paypal' ? input.username : input
     const sanitizedInput = sanitizeFilename(inputValue, category.id === 'url')
     const suffix = {
       url: 'qr-code',
       email: 'email-qr-code',
       phone: 'phone-qr-code',
+      whatsapp: 'whatsapp-qr-code',
       x_profile: 'x-account-qr-code',
       instagram: 'instagram-account-qr-code',
       tiktok: 'tiktok-account-qr-code',

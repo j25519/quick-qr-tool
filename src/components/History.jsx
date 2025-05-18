@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import QRCode from 'react-qr-code'
+import QRInteract from 'react-qr-code'
 import { FiDownload, FiTrash2 } from 'react-icons/fi'
 
 function History({ history, onClose, onDelete, addToast }) {
@@ -29,13 +29,13 @@ function History({ history, onClose, onDelete, addToast }) {
   }
 
   const getFilename = (input, categoryId) => {
-    // For categories with object inputs, use the primary field (e.g., username)
     const inputValue = ['linkedin', 'paypal', 'event', 'wifi', 'geo'].includes(categoryId) ? input.username || input.title || input.ssid || `${input.lat}-${input.lon}` : input
     const sanitizedInput = sanitizeFilename(inputValue, categoryId === 'url')
     const suffix = {
       url: 'qr-code',
       email: 'email-qr-code',
       phone: 'phone-qr-code',
+      whatsapp: 'whatsapp-qr-code',
       x_profile: 'x-account-qr-code',
       instagram: 'instagram-account-qr-code',
       tiktok: 'tiktok-account-qr-code',
@@ -94,7 +94,7 @@ function History({ history, onClose, onDelete, addToast }) {
             {history.map((item, index) => (
               <div key={index} className="flex items-center gap-4 border-b border-gray-200 dark:border-gray-700 pb-4">
                 <div ref={qrRefs.current[index]} className="flex-shrink-0">
-                  <QRCode value={item.qrValue} size={64} />
+                  <QRInteract value={item.qrValue} size={64} />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm">
@@ -102,9 +102,8 @@ function History({ history, onClose, onDelete, addToast }) {
                     {(() => {
                       switch (item.category.id) {
                         case 'phone':
-                          return typeof item.input === 'object'
-                            ? `${item.input.phone}${item.input.name ? ` (${item.input.name})` : ''}`
-                            : item.input;
+                        case 'whatsapp':
+                          return item.input;
                         case 'paypal':
                           return `${item.input.username}, ${item.input.amount} ${item.input.currency}`;
                         case 'event':
