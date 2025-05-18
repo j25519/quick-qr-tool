@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-toast {
+  animation: toastIn 0.3s ease-in-out;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom toggle styles */
+.custom-toggle {
+  appearance: none;
+  width: 40px;
+  height: 20px;
+  background: #d1d5db; /* gray-300 */
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.custom-toggle:checked {
+  background: #2563eb; /* blue-600 */
+}
+
+.custom-toggle::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.custom-toggle:checked::before {
+  transform: translateX(20px);
+}
+
+.custom-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5); /* blue-600/50 */
+}
+
+/* Toast styles */
+.toast {
+  position: relative;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+/* Datepicker styles */
+.react-datepicker {
+  @apply bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 rounded-lg shadow-lg font-sans;
+}
+.react-datepicker__input-container input {
+  @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-700 rounded-lg p-3 w-full;
+}
+.react-datepicker__header {
+  @apply bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100;
+}
+.react-datepicker__day,
+.react-datepicker__day-name,
+.react-datepicker__time-list-item {
+  @apply text-gray-900 dark:text-gray-100;
+}
+.react-datepicker__day:hover,
+.react-datepicker__time-list-item:hover {
+  @apply bg-gray-200 dark:bg-gray-600;
+}
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  @apply bg-blue-600 text-white;
+}
+.react-datepicker__time-container,
+.react-datepicker__time-box {
+  @apply bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700;
+}
+.react-datepicker__navigation {
+  @apply text-gray-900 dark:text-gray-100;
+}
+.react-datepicker__triangle {
+  @apply hidden; /* Remove the default triangle for cleaner look */
+}
