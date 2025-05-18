@@ -160,7 +160,7 @@ function InputForm({ category, input, onInputChange, onGenerate, validateInput, 
             />
             {category.id === 'telegram' && (
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                You can enter the username for a Telegram user, channel, or public group.
+                You can enter the username for a Telegram user, channel, bot, or public group.
               </p>
             )}
           </>
