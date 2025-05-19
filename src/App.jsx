@@ -20,7 +20,7 @@ const categories = [
   { id: 'email', name: 'Email Address', format: (email) => `mailto:${email}` },
   { id: 'phone', name: 'Phone Number', format: (phone) => `tel:${phone}` },
   { id: 'whatsapp', name: 'WhatsApp Message', format: (phone) => `https://wa.me/${phone.replace(/^\+/, '')}` },
-  { id: 'x_profile', name: 'X Profile', format: (username) => `https://x.com/${username.replace('@', '')}` },
+  { id: 'x_profile', name: 'X (Twitter) Profile', format: (username) => `https://x.com/${username.replace('@', '')}` },
   { id: 'instagram', name: 'Instagram Profile', format: (username) => `https://instagram.com/${username.replace('@', '')}` },
   { id: 'tiktok', name: 'TikTok Profile', format: (username) => `https://tiktok.com/@${username.replace('@', '')}` },
   { id: 'telegram', name: 'Telegram Profile', format: (username) => `https://t.me/${username.replace('@', '')}` },
@@ -178,7 +178,7 @@ function App() {
           return { isValid: false, error: 'Invalid PayPal username', message: '' }
         }
         if (!amount || !/^\d+(\.\d{1,2})?$/.test(amount) || parseFloat(amount) <= 0) {
-          return { isValid: false, error: 'Invalid amount (e.g., 10.99)', message: '' }
+          return { isValid: false, error: 'Invalid amount (e.g., 420.69)', message: '' }
         }
         const validCurrencies = ['USD', 'EUR', 'GBP', 'AUD', 'CAD', 'JPY']
         if (!currency || !validCurrencies.includes(currency)) {
