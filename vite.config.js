@@ -11,12 +11,20 @@ export default defineConfig({
       outlierSupport: {
         tailwind: true, // Ensures Tailwind's dynamic styles are CSP-compliant
       },
+      // Define CSP policies
+      policies: {
+        'default-src': ["'self'"],
+        'img-src': ["'self'", "data:"],
+        'script-src-elem': ["'self'"],
+        'style-src-elem': ["'self'"],
+      },
       // Apply CSP in both development and production
       dev: {
         enabled: true, // Enforce CSP in dev mode
       },
       build: {
         enabled: true, // Enforce CSP in production builds
+        meta: true, // Inject CSP as meta tag in index.html
       },
     }),
   ],
