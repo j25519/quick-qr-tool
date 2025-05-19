@@ -29,7 +29,9 @@ function History({ history, onClose, onDelete, addToast }) {
   }
 
   const getFilename = (input, categoryId) => {
-    const inputValue = ['linkedin', 'paypal', 'event', 'wifi', 'geo'].includes(categoryId) ? input.username || input.title || input.ssid || `${input.lat}-${input.lon}` : input
+    const inputValue = ['linkedin', 'paypal', 'event', 'wifi', 'geo'].includes(categoryId)
+      ? input.username || input.title || input.ssid || `${input.lat}-${input.lon}`
+      : input
     const sanitizedInput = sanitizeFilename(inputValue, categoryId === 'url')
     const suffix = {
       url: 'qr-code',
@@ -103,7 +105,7 @@ function History({ history, onClose, onDelete, addToast }) {
                       switch (item.category.id) {
                         case 'phone':
                         case 'whatsapp':
-                          return item.input;
+                          return typeof item.input === 'object' ? item.input.phone || item.input.name || 'Unknown input' : item.input;
                         case 'paypal':
                           return `${item.input.username}, ${item.input.amount} ${item.input.currency}`;
                         case 'event':
@@ -115,7 +117,7 @@ function History({ history, onClose, onDelete, addToast }) {
                         case 'linkedin':
                           return `${item.input.username} (${item.input.type === 'company' ? 'Company Page' : 'Personal Profile'})`;
                         default:
-                          return item.input;
+                          return typeof item.input === 'object' ? JSON.stringify(item.input) : item.input || 'Unknown input';
                       }
                     })()}
                   </p>
