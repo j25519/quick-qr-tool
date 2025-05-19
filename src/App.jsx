@@ -165,6 +165,9 @@ function App() {
       case 'instagram':
       case 'tiktok':
       case 'telegram':
+        return /^[a-zA-Z0-9_-]{3,}$/.test(input.replace('@', ''))
+          ? { isValid: true, error: '', message: '' }
+          : { isValid: false, error: 'Invalid username (3+ characters, letters, numbers, underscores, hyphens only)', message: '' }
       case 'linkedin':
         return /^[a-zA-Z0-9_-]{3,}$/.test(input.username.replace('@', ''))
           ? { isValid: true, error: '', message: '' }
