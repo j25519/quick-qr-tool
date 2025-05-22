@@ -52,25 +52,29 @@ function QRCodeDisplay({ value, input, category, blackQrCode }) {
 
   const getCanvasBlob = () => {
     return new Promise((resolve) => {
-      const svg = qrRef.current.querySelector('svg')
-      if (!svg) {
-        resolve(null)
-        return
-      }
-      const svgData = new XMLSerializer().serializeToString(svg)
-      const canvas = document.createElement('canvas')
-      canvas.width = 1024
-      canvas.height = 1024
-      const ctx = canvas.getContext('2d')
-      const img = new Image()
+      const svg = qrRef.current.querySelector('svg');
+      if (!svg) return resolve(null);
+
+      const serializer = new XMLSerializer();
+      const svgData = serializer.serializeToString(svg);
+      const img = new Image();
+      const scale = window.devicePixelRatio || 1;
+      const size = 1024 * scale;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+
+      const ctx = canvas.getContext('2d');
       img.onload = () => {
-        ctx.drawImage(img, 0, 0, 1024, 1024)
-        canvas.toBlob((blob) => resolve(blob), 'image/png')
-      }
-      img.onerror = () => resolve(null)
-      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData)
-    })
-  }
+        ctx.setTransform(scale, 0, 0, scale, 0, 0); // scale for crisp pixels
+        ctx.drawImage(img, 0, 0, 1024, 1024);
+        canvas.toBlob(blob => resolve(blob), 'image/png');
+      };
+      img.onerror = () => resolve(null);
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
+    });
+  };
 
   const downloadQR = async () => {
     const blob = await getCanvasBlob()
@@ -102,6 +106,7 @@ function QRCodeDisplay({ value, input, category, blackQrCode }) {
         <QRCode
           value={value}
           size={256}
+          level="H"
           fgColor={blackQrCode ? '#FFFFFF' : '#000000'}
           bgColor={blackQrCode ? '#000000' : '#FFFFFF'}
         />
